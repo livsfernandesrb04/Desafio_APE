@@ -1,0 +1,90 @@
+#include <stdio.h>
+
+int valida_nota(float nota, float min, float max) {
+    if (nota < min || nota > max) {
+        return 0; 
+    }
+    return 1;  
+}
+
+int main() {
+    float N1, N2, PPD, EU, N3, NF;
+    int fez_EU, fez_N3;
+    
+    printf("Digite a N1 (0 a 4.5): ");
+    scanf("%f", &N1);
+    if (!valida_nota(N1, 0.0, 4.5)) {
+        printf("Erro:Código de erro 3\n");
+        return 3;
+    }
+
+    printf("Digite a N2 (0 a 4.5): ");
+    scanf("%f", &N2);
+    if (!valida_nota(N2, 0.0, 4.5)) {
+        printf("Erro:Código de erro 3\n");
+        return 3;
+    }
+
+    printf("Digite a PPD (0 a 1): ");
+    scanf("%f", &PPD);
+    if (!valida_nota(PPD, 0.0, 1.0)) {
+        printf("Erro: Código de erro 3\n");
+        return 3;
+    }
+
+    printf("Foi realizado o Exame Unificado (0 = não, 1 = sim)? ");
+    scanf("%d", &fez_EU);
+    if (fez_EU == 1) {
+        printf("Digite a nota do EU (0 a 1): ");
+        scanf("%f", &EU);
+        if (!valida_nota(EU, 0.0, 1.0)) {
+            printf("Erro:Código de erro 3\n");
+            return 3;
+        }
+        PPD = EU; 
+    } else if (fez_EU != 0) {
+        printf("Erro: Código de erro 3\n");
+        return 3;
+    }
+
+    printf("Foi feito a N3 (0 = não, 1 = sim)? ");
+    scanf("%d", &fez_N3);
+    if (fez_N3 == 1) {
+        printf("Digite a N3 (0 a 4.5): ");
+        scanf("%f", &N3);
+        if (!valida_nota(N3, 0.0, 4.5)) {
+            printf("Erro: Código de erro 3\n");
+            return 3;
+        }
+
+        if (N1 < N2) {
+            N1 = N3;
+        } else {
+            N2 = N3;
+        }
+    } else if (fez_N3 != 0) {
+        printf("Erro: Código de erro 3\n");
+        return 3;
+    }
+    
+    if (fez_EU == 1) {
+        NF = N1 + N2 + PPD + EU;
+    } else{
+        NF = N1 + N2 + PPD;
+    }
+
+    if (NF > 10) {
+        NF = 10;
+    }
+
+    printf("Nota final: %.2f\n", NF);
+
+    if (NF >= 7.0) {
+        printf(" Aprovado\n");
+    } else {
+        printf(" Reprovado\n");
+    }
+
+    return 0;
+}
+
