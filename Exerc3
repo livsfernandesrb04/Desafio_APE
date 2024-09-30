@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+#include<stdlib.h>
+#include<locale.h>
+#include "func_val.h"
+
+
+int main() {
+    char frase[101];
+    char prosseguir;
+    int i, j, b, m, n, verificacao, x = 1, numcas;
+    long int resultado;
+    char fim[] = "00";
+    char hex[3];
+
+        scanf("%d", &m);
+        
+        for(n = 0; n < m; n++){
+        	
+        	scanf("%d", &b);
+
+            scanf("%100s", &frase);
+        
+            for(i = 0; i < strlen(frase); i += 2) {
+                x = i / 2 + 1;
+                verificacao = func_val(x, b);
+                if(verificacao != 0) {
+                    hex[0] = frase[i];
+                    hex[1] = frase[i + 1];
+                    hex[2] = '\0';
+                    if(strcmp(hex, fim) == 0) {
+                        break;
+                    }
+                    resultado = strtol(hex, NULL, 16);
+                 
+                    
+                }
+            }   
+                  
+        }
+
+    return 0;
+}
